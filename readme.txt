@@ -1,9 +1,0 @@
-﻿在模块化盛行的今天，收集工作中经常会用到的一些模块代码段是很有必要的！
-getUrlSearch.js获取url问号后参数的方法也就是search参数
-getUrlHash.js获取url#后参数的方法也就是hash值
-wordLimit.js实现input还可输入字数的限制提示
-inputClear.js实现input右边一个叉叉清除内容的模块
-browser.js浏览器环境检测
-openAjax.js基于jq的ajax请求封装，主要是有默认初始参数减少每次进行ajax的参数输入
-
-持续更新中......

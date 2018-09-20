@@ -11,7 +11,7 @@ function getUrlSearch(name,callBack){
         testReg=new RegExp('^'+name+'=');
     for(var i=0,len=searchArr.length;i<len;i++){
         if(testReg.test(searchArr[i])/*searchArr[i].indexOf(name+'=')!=-1*/){
-            resultVal=searchArr[i].split('=')[1];
+            resultVal=decodeURI(searchArr[i].split('=')[1]);
         }
     }
     callBack && callBack(resultVal);

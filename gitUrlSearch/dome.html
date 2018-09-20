@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>getUrlSearch测试</title>
+    <style type="text/css">
+        .tips{
+            color:red;
+        }
+        .showResult{
+            color:green;
+        }
+    </style>
+</head>
+<body>
+    <a href="./dome.html?test=测试">点我开始测试</a>
+    <div class="showResult"></div>
+    <script>
+        function getUrlSearch(name,callBack){
+            var urlSearch=location.search,
+                searchArr=urlSearch.substring(1).split('&'),
+                resultVal='',
+                testReg=new RegExp('^'+name+'=');
+            for(var i=0,len=searchArr.length;i<len;i++){
+                if(testReg.test(searchArr[i])/*searchArr[i].indexOf(name+'=')!=-1*/){
+                    resultVal=decodeURI(searchArr[i].split('=')[1]);
+                }
+            }
+            callBack && callBack(resultVal);
+            return resultVal;
+        }
+        document.querySelector('.showResult').innerHTML = 'test:'+(getUrlSearch('test') ? getUrlSearch('test') : '没有key为test的search值');
+    </script>
+</body>
+</html>

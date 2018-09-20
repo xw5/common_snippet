@@ -11,7 +11,7 @@ function getUrlHash(name,callBack){
         testReg=new RegExp('^'+name+'=');
     for(var i=0,len=hashArr.length;i<len;i++){
         if(testReg.test(hashArr[i])){
-            resultVal=hashArr[i].split('=')[1];
+            resultVal=decodeURI(hashArr[i].split('=')[1]);
         }
     }
     callBack && callBack(resultVal);

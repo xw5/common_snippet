@@ -2,7 +2,6 @@
  * Created by xiewu on 2016/10/11.
  * ajax封装，方便ajax的调用
  */
-require('../plugins/layer_mobile/layer');//引入layer弹窗组件
 //@@setting是一个参数对象对应的参数如下
 //@param url请求的地址
 //@param type请求的方式

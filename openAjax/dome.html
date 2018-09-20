@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ajax封装</title>
+</head>
+<body>
+    <div id="showResult"> </div>
+    <script src="../lib/jquery/jquery.js"></script>
+    <script>
+        function openAjax(setting){
+            var defaultSetting={//默认ajax是type请求,返回json数据
+                'type':'get',
+                'async':true,
+                'dataType':'json',
+                'xhrFields': {withCredentials: true},
+                'crossDomain': true,
+                'cache':false
+            };
+            $.extend(defaultSetting,setting);//参数合并
+            $.ajax({//调用JQ的ajax请求
+                'url':defaultSetting['url'],
+                'type':defaultSetting['type'],
+                'data':defaultSetting['data'],
+                'async':defaultSetting['async'],
+                'xhrFields': defaultSetting['xhrFields'],
+                'crossDomain': defaultSetting['crossDomain'],
+                'cache':defaultSetting['cache'],
+                'dataType':defaultSetting['dataType'],
+                'jsonp':defaultSetting['jsonp'],
+                'jsonpCallback':defaultSetting['jsonpCallback'],
+                'success':function(data){
+                    defaultSetting['success'] && defaultSetting['success'](data);
+                },
+                'error':function(XmlHttpRequest,textStatus,errorThrown){
+                    defaultSetting['error'] && defaultSetting['error'](XmlHttpRequest,textStatus,errorThrown);
+                }
+            })
+        }
+        openAjax({
+            url:'https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su',
+            dataType:'jsonp',
+            data:{'wd':'web前端'},
+            jsonp:'cb',//指定传后台的回调key名
+            // jsonpCallback:'getData',//指定回调函数名
+            success:function(data){
+                var resultHtml = '';
+                for(var i=0,len=data.s.length;i<len;i++){
+                    resultHtml +='<p>'+i+':'+data.s[i]+'</p>'
+                }
+                $('#showResult').html(resultHtml);
+            }
+        })
+    </script>
+</body>
+</html>

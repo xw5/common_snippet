@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>getUrlHash测试</title>
+    <style type="text/css">
+        .tips{
+            color:red;
+        }
+        .showResult{
+            color:green;
+        }
+    </style>
+</head>
+<body>
+    <a href="#test=测试" id="startTest">点此测试</a>
+    <div class="showResult"></div>
+    <script>
+        function getUrlHash(name,callBack){
+            var urlHash=location.hash,
+                hashArr=urlHash.substring(1).split('#'),
+                resultVal='',
+                testReg=new RegExp('^'+name+'=');
+            for(var i=0,len=hashArr.length;i<len;i++){
+                if(testReg.test(hashArr[i])){
+                    resultVal=decodeURI(hashArr[i].split('=')[1]);
+                }
+            }
+            callBack && callBack(resultVal);
+            return resultVal;
+        }
+        document.querySelector('#startTest').addEventListener('click',function(){
+            location.reload();
+        });
+        document.querySelector('.showResult').innerHTML = 'test:'+(getUrlHash('test') ? getUrlHash('test') : '没有key为test的hash值');
+    </script>
+</body>
+</html>

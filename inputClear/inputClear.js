@@ -3,13 +3,12 @@
  * 清除input内容效果
  */
 function inputClear(){
-    var delBtn=$('.delBtn');
+    var delBtn=$('[del-link]');
     delBtn.each(function(){
         $(this).on('click',function(){
-            var input =$(this).parent().find('input');
+            var input =$('[del-input='+$(this).attr('del-link')+']');
             input.val('').focus();
         })
     })
-
 }
 module.exports=inputClear;
