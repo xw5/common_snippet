@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>本地存储操作</title>
+</head>
+<body>
+    <p>通过控制台在application下可查看本地存储，详情见说明图</p>
+    <input type="text" class="test_input">
+    <input class="test_btn" type="button" value="存储无有效期且key值为test的localstorage">
+    <input class="test_btn" type="button" value="获取key值为test的localstorage值">
+    <input class="test_btn" type="button" value="存储有效期为1小时且key值为testdur的localstorage">
+    <input class="test_btn" type="button" value="获取有效期为1小时且key值为testdur的localstorage值">
+    <div class="showResult"></div>
+    <script>
+        //作为本地存储的公用方法
+        //@param key 本地存储的key值
+        //@param value 本地存储的值
+        //@param time 该key本地存储的有效期,单位为小时,不传或者传0就
+        function setLocalStorage (key,value,time){
+            localStorage.setItem(key,JSON.stringify({
+                "dur":time ? new Date().getTime()+time*60*3600 : '-1',
+                "value":value
+            }))
+        }
+        //作为本地存储的公用方法
+        //@param key 本地存储的key值
+        //@param value 本地存储的源数据
+        //@param keys 本地存储要提取的用于存储的值
+        //@param time 该key本地存储的有效期,单位为小时
+        function setLocalStorageKeys (key,value,keys,time){
+            var storageValue = [];
+            var temp = {};
+            for(var i=0,lenx=value.length;i<lenx;i++){
+                temp = {};
+                for(var j=0,lenj=keys.length;j<lenj;j++){
+                temp[keys[j]]=value[i][keys[j]];
+                }
+                storageValue.push(temp);
+            }
+            localStorage.setItem(key,JSON.stringify({
+                "dur":new Date().getTime()+time*60*3600,
+                "value":storageValue
+            }))
+        }
+        //作为本地存储的提取方法，如果该值没有，或者已经过了有效期就直接返回null,否则返回需要的值
+        //@param key 想拿取的本地存储的key值
+        function getLocalStorage(key){
+            var nowItem = JSON.parse(localStorage.getItem(key));
+            if(!nowItem) return null;
+            if(nowItem.dur < new Date().getTime() && nowItem.dur != '-1'){
+                return null;
+            }else{
+                return nowItem.value;
+            }
+        }
+        var testList = document.querySelectorAll('.test_btn');
+        var testInput = document.querySelector('.test_input');
+        var resultShow = document.querySelector('.showResult');
+        //存储无有效期且key值为test的localstorage
+        testList[0].addEventListener('click',function(){
+            var testVal = testInput.value.trim();
+            if(testVal == ''){
+                alert('文本框不能为空！');
+                return;
+            }
+            setLocalStorage('test',testVal)
+        })
+        //获取key值为test的localstorage值
+        testList[1].addEventListener('click',function(){
+            alert(getLocalStorage('test'));
+        })
+        //存储有效期为1小时且key值为testdur的localstorage
+        testList[2].addEventListener('click',function(){
+            var testVal = testInput.value.trim();
+            if(testVal == ''){
+                alert('文本框不能为空！');
+                return;
+            }
+            setLocalStorage('testdur',testVal,1);
+        })
+        //获取有效期为1小时且key值为testdur的localstorage值
+        testList[3].addEventListener('click',function(){
+            alert(getLocalStorage('testdur'));
+        })
+        
+    </script>
+</body>
+</html>

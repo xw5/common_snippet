@@ -1,6 +1,6 @@
 /**
- * Created by xiewu on 2018/9/20.
- * 获取字符串长度
+ * Created by xiewu on 2018/9/21.
+ * 滚动监听实现
  */
 /**在指定的元素上绑定属性data-scroll或者data-scroll-once就会自动进入滚动监听的元素，
 *  data-scroll为永久监听，data-scroll-once为一次监听。

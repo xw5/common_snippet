@@ -9,7 +9,9 @@ lib是使用这些模块可能需要依赖的库，是否需要可看相关dome�
 * inputClear实现input右边一个叉叉清除内容的模块
 * browser浏览器环境检测
 * openAjax基于jq的ajax请求封装，主要是有默认初始参数减少每次进行ajax的参数输入
-* getStrLen获取字符串的长度
+* getStrLen获取字符串的长度,传参可实现中文与圆角占二个长度
 * commonRegexTest常用正则判断汇总
+* scrollFn滚动监听实现,可用于监听元素进入可视区，执行添加指定样式或者执行相应函数
+* localStorageFn用存储&获取localStorage,支持设置有效期
 
 持续更新中......
