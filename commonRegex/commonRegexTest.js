@@ -35,7 +35,7 @@ function commonRegexTest(str,type){
             result = /^[1-9]\d{5}$/.test(str);
             break;
         case 'card'://判断是否是身份证号
-            result = /^\d{15}|(\d{17}[\dX]{1})$/i.test(str);
+            result = /^\d{15}$|^(\d{17}[\dX]{1})$/i.test(str);
             break;
         default ://默认判断是否为空
             result = /^\s*$/i.test(str);
