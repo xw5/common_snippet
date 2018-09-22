@@ -13,5 +13,6 @@ lib是使用这些模块可能需要依赖的库，是否需要可看相关dome�
 * common_regex_test常用正则判断汇总
 * scroll_handle滚动监听实现,可用于监听元素进入可视区，执行添加指定样式或者执行相应函数
 * local_storage_handle用存储&获取localStorage,支持设置有效期
+* cookie_handle用存储&获取&删除cookie,支持设置有效期,有效域名，是否只有http使用等
 
 持续更新中......

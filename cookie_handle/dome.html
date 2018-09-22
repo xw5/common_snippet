@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>cookie操作</title>
+</head>
+<body>
+    <p>通过控制台在application下可查看cookie，详情见说明图</p>
+    <input type="text" class="test_input">
+    <input class="test_btn" type="button" value="存储临时且key值为test的cookie">
+    <input class="test_btn" type="button" value="获取key值为test的cookie值">
+    <input class="test_btn" type="button" value="存储有效期为1小时且key值为testdur的cookie">
+    <input class="test_btn" type="button" value="获取有效期为1小时且key值为testdur的cookie值">
+    <input class="test_btn" type="button" value="删除key值为testdur的cookie值">
+    <div class="showResult"></div>
+    <script>
+        //设置cookie
+        //@param name是要设置的cookie名
+        //@param value是要设置的cookie值
+        //@param options是设置的cookie相关配置，如有效期expires，有效域名domain,影响的路径path，是否只能http使用HTTPOnly...
+        function setCookie(name,value,options){
+            if (!name) {
+                throw new Error("cookie must have name");
+            }    
+            var enc = encodeURIComponent;
+            var parts = [];
+            value = (value !== null && value !== undefined) ? value.toString() : "";
+            options = options || {};
+            parts.push(enc(name) + "=" + enc(value));
+
+            // domain中必须包含两个点号     
+            if (options.domain) {
+                parts.push("domain=" + options.domain);
+            }
+            if (options.path) {
+                parts.push("path=" + options.path);  
+            }
+            // 如果不设置expires和max-age浏览器会在页面关闭时清空cookie              
+            if (options.expires) {
+                parts.push("expires=" + options.expires.toGMTString());             
+            }
+            if (options.maxAge && typeof options.maxAge === "number") {
+                parts.push("max-age=" + options.maxAge);         
+            }    
+            if (options.httpOnly) {
+                parts.push("HTTPOnly");
+            }      
+            if (options.secure) {
+                parts.push("secure");        
+            }
+            document.cookie = parts.join("; ");
+        }
+
+        //获取cookie
+        //param name要获取的cookie名
+        function getCookie(name){
+            var cookiestr=decodeURIComponent(document.cookie),//获取cookie,格式应该为"name=value; name0=value0"
+                cookiearr0=cookiestr.split("; "),//以"; "来分构字符串成数组 ["name=value","name0=value0"]
+                cookiearr1=[],
+                result = '';
+            for(var i=0;i<cookiearr0.length;i++){
+                cookiearr1=cookiearr0[i].split("=");//以"="分构字符串为数组,["name","value"]
+                if(cookiearr1[0] == name){//如果找到相同名称的cookie,返回它的值
+                    result = cookiearr1[1];
+                    break;
+                }
+            }
+            return result;
+        }
+
+        //删除cookie
+        //param name要删除的cookie名
+        function removeCookie(name){
+            setCookie(name,"",{expires:new Date(0)});//把过期时间设为昨天，即删除了当前cookie
+        }
+
+        //示例代码开始
+        var testList = document.querySelectorAll('.test_btn');
+        var testInput = document.querySelector('.test_input');
+        var resultShow = document.querySelector('.showResult');
+
+        //存储临时且key值为test的cookie
+        testList[0].addEventListener('click',function(){
+            var testVal = testInput.value.trim();
+            if(testVal == ''){
+                alert('文本框不能为空！');
+                return;
+            }
+            setCookie('test',testVal)
+        })
+
+        //获取key值为test的cookie值
+        testList[1].addEventListener('click',function(){
+            alert(getCookie('test'));
+        })
+
+        //存储有效期为1小时且key值为testdur的cookie
+        testList[2].addEventListener('click',function(){
+            var testVal = testInput.value.trim();
+            if(testVal == ''){
+                alert('文本框不能为空！');
+                return;
+            }
+            setCookie('testdur',testVal,{expires:new Date(new Date().getTime()+60*60*1000)});
+        })
+
+        //获取有效期为1小时且key值为testdur的cookie值
+        testList[3].addEventListener('click',function(){
+            alert(getCookie('testdur'));
+        })
+
+        //删除key值为testdur的cookie值
+        testList[4].addEventListener('click',function(){
+            removeCookie('testdur');
+        })
+        
+    </script>
+</body>
+</html>
