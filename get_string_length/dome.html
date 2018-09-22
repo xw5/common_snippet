@@ -12,7 +12,7 @@
     <input class="test_btn" type="button" value="一个中文与全角算二个长度">
     <div class="showResult"></div>
     <script>
-        function getStrLen(str,mode){
+        function getStringLength(str,mode){
             if(!mode){
                 return str.length;
             }
@@ -22,10 +22,10 @@
         var showResult = document.querySelector('.showResult');
         var testInput = document.querySelector('.test_input');
         btnList[0].addEventListener('click',function(){
-            showResult.innerHTML = getStrLen(testInput.value);
+            showResult.innerHTML = getStringLength(testInput.value);
         });
         btnList[1].addEventListener('click',function(){
-            showResult.innerHTML = getStrLen(testInput.value,true);
+            showResult.innerHTML = getStringLength(testInput.value,true);
         });
     </script>
 </body>

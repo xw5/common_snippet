@@ -12,7 +12,7 @@
 //@param success成功后的回调
 //@param error失败后的回调
 //@param dataType返回的数据类型
-function openAjax(setting){
+function startAjax(setting){
     var defaultSetting={//默认ajax是type请求,返回json数据
         'type':'get',
         'async':true,
@@ -39,4 +39,4 @@ function openAjax(setting){
         }
     })
 }
-module.exports=openAjax;
+module.exports=startAjax;

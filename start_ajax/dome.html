@@ -10,7 +10,7 @@
     <div id="showResult"> </div>
     <script src="../lib/jquery/jquery.js"></script>
     <script>
-        function openAjax(setting){
+        function startAjax(setting){
             var defaultSetting={//默认ajax是type请求,返回json数据
                 'type':'get',
                 'async':true,
@@ -39,7 +39,7 @@
                 }
             })
         }
-        openAjax({
+        startAjax({
             url:'https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su',
             dataType:'jsonp',
             data:{'wd':'web前端'},
