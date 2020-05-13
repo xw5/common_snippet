@@ -27,11 +27,26 @@
     }
     return str;
   }
-  console.log(handleThousands(99))
-  console.log(handleThousands(1000))
-  console.log(handleThousands(11000))
-  console.log(handleThousands(10002))
-  console.log(handleThousands(808002))
+
+  // 更高效简洁的方式
+  function handleThousandsNew(number) {
+    return String(number).replace(/\d{1,3}(?=(\d{3})+$)/g,function(s){
+      return s+','
+    })
+  }
+  console.log("handleThousands", handleThousands(99))
+  console.log("handleThousands", handleThousands(1000))
+  console.log("handleThousands", handleThousands(11000))
+  console.log("handleThousands", handleThousands(10002))
+  console.log("handleThousands", handleThousands(808002))
+  console.log("handleThousands", handleThousands(888808002))
+
+  console.log("handleThousandsNew",handleThousandsNew(99))
+  console.log("handleThousandsNew",handleThousandsNew(1000))
+  console.log("handleThousandsNew",handleThousandsNew(11000))
+  console.log("handleThousandsNew",handleThousandsNew(10002))
+  console.log("handleThousandsNew",handleThousandsNew(808002))
+  console.log("handleThousandsNew",handleThousandsNew(888808002))
 </script>
 </body>
 </html>

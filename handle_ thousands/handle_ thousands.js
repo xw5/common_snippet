@@ -19,4 +19,14 @@ function fillUp(number) {
   return str;
 }
 
-module.exports=handleThousands;
+// 更高效简洁的方式
+function handleThousandsNew(number) {
+  return String(number).replace(/\d{1,3}(?=(\d{3})+$)/g,function(s){
+    return s+','
+  })
+}
+
+module.exports={
+  handleThousands: handleThousands,
+  handleThousandsNew: handleThousandsNew
+};
