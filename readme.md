@@ -16,5 +16,6 @@ lib是使用这些模块可能需要依赖的库，是否需要可看相关dome�
 * *cookie_handle* 用存储&获取&删除cookie,支持设置有效期,有效域名，是否只有http使用等
 * *rem_fit* rem布局适配方案
 * *handle_thousands* 千分位处理，如999999返回999,999
+* *date_util* 常用日期格式化函数
 
 持续更新中......
