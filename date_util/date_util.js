@@ -4,7 +4,7 @@
  * @param {Array} separate 分隔符,默认为["天","小时","分","秒"]
  * @param {Boolean} isAll 是否要显示全部,不传则会忽略不0的项
  */
-function formatCountDownStr(countdown, separate, isAll) {
+function getDDHHMMSS(countdown, separate, isAll) {
   var separate = separate ? separate : ["天", "小时", "分", "秒"];
   var day = Math.floor(countdown / 86400);
   countdown -= day * 86400;
@@ -36,13 +36,14 @@ function formatCountDownStr(countdown, separate, isAll) {
  * @param {Number} times 毫秒数
  * @param {Array} separate 分隔符 默认为["-",":"]
  */
-function formatToday(times, separate) {
+function getYMD_HHMMSS(times, separate) {
   var now = null,
   separate = separate ? separate : ["-", ":"];
-  if (times) {
+  if (times && typeof times == "number") {
     now = new Date(times)
   } else {
     now = new Date()
+    separate = times ? times : ["-", ":"];
   }
   return now.getFullYear().toString().toString() + separate[0] +
     ("00" + (now.getMonth() + 1).toString()).slice(-2) + separate[0] +
@@ -54,10 +55,10 @@ function formatToday(times, separate) {
 
 /**
 * 获得多少小时以前
-* @param {Number} passTime 事件发生时的毫秒数
+* @param {Number} pastTime 事件发生时的毫秒数
 */
-function getPastTimeStr(passTime) {
-  var remain = (Date.now() - passTime) / 1000;
+function getPastTimeStr(pastTime) {
+  var remain = (Date.now() - pastTime) / 1000;
   var y = Math.floor(remain / 31104000);
   remain = remain % 31104000;
   var M = Math.floor(remain / 2592000);
@@ -106,9 +107,51 @@ function sliceTime(second) {
   return [("00" + d).slice(-2), ("00" + h).slice(-2), ("00" + m).slice(-2), ("00" + s).slice(-2)];
 }
 
+/**
+ * 返回星期几
+ * @param {Date | number} day
+ */
+function getWeekDay(day) {
+  let weekName = ["周日", "周一", "周二", "周三", "周四", "周五", "周六"];
+  if (day instanceof Date) {
+    return weekName[day.getDay()];
+  } else {
+    return weekName[day];
+  }
+}
+
+/**
+ * 返回integer： 20180102
+ * @param {Date} date 日期对象
+ */
+function getDayNumber(date) {
+  date = date ? date : new Date();
+  return date.getFullYear() * 10000 + (date.getMonth()+1) * 100 + date.getDate();
+}
+
+/**
+ * 格式 3'23''
+ * @param {Number} secs 秒
+ */
+function getSpeed(second){
+  var h = Math.floor(second / 3600);
+  var m = Math.floor((second / 60 % 60));
+  var s = Math.floor((second % 60));
+  let result = "0'00\"";
+  if (h < 1) {
+      result = m + "\'" + s + "\"";
+  } else {
+      result = h * 60 + m + "\'" + s + "\"";
+  }
+  return result;
+}
+
 
 module.exports = {
-  formatCountDownStr: formatCountDownStr,
-  formatToday: formatToday,
-  getPastTimeStr: getPastTimeStr
+  getDDHHMMSS: getDDHHMMSS,
+  getYMD_HHMMSS: getYMD_HHMMSS,
+  getPastTimeStr: getPastTimeStr,
+  getWeekDay: getWeekDay,
+  getDayNumber: getDayNumber,
+  getSpeed: getSpeed
 };
