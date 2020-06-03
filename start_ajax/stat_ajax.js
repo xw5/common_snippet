@@ -17,13 +17,13 @@ function startAjax(setting){
         'type':'get',
         'async':true,
         'dataType':'json',
-        'xhrFields': {withCredentials: true},
+        'xhrFields': {withCredentials: false},
         'crossDomain': true,
         'cache':false,
     };
     $.extend(defaultSetting,setting);//参数合并
     $.ajax({//调用JQ的ajax请求
-        'url':userData.openUrl+defaultSetting['url'],
+        'url':defaultSetting['url'],
         'type':defaultSetting['type'],
         'data':defaultSetting['data'],
         'async':defaultSetting['async'],
