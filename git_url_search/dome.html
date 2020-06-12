@@ -17,7 +17,9 @@
 <body>
     <a href="./dome.html?test=测试">点我开始测试</a>
     <div class="showResult"></div>
+    <div class="showResultQueryObj"></div>
     <script>
+
         function getUrlSearch(name,callBack){
             var urlSearch=location.search,
                 searchArr=urlSearch.substring(1).split('&'),
@@ -31,7 +33,20 @@
             callBack && callBack(resultVal);
             return resultVal;
         }
+
+        function urlQueryParse(url){
+          var url = url ? url : location.href;
+          var arr = url.split('?');
+          var params = arr[1] ? arr[1].split('&') : [];
+          var obj = {};
+          for(var i=0;i<params.length;i++){
+            var param = params[i].split('=');
+            obj[param[0]] = param[1]; 
+          }
+          return obj;
+        }
         document.querySelector('.showResult').innerHTML = 'test:'+(getUrlSearch('test') ? getUrlSearch('test') : '没有key为test的search值');
+        document.querySelector('.showResultQueryObj').innerHTML = 'query:'+JSON.stringify(urlQueryParse());
     </script>
 </body>
 </html>
