@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>动态加载js测试</title>
+    <style type="text/css">
+        .tips{
+            color:red;
+        }
+        .showResult{
+            color:green;
+        }
+    </style>
+</head>
+<body>
+    <script>
+      const defaultJs = "http://res-ydz.cmcm.com/scan_app_h5/scan_vip_config.js";
+      /**
+       * 
+       * @param {string} url 加载的js地址
+       * @param {function} cb 加载完的回调
+       * @param {boolean} isNoCache 是否要实时更新js的，如果为true会在链接后加上时间戳
+       */
+      function loadConfigScript(url, cb, isNoCache = true) {
+        var head = document.getElementsByTagName('head')[0],
+          scriptTag = document.createElement('script'),
+          scriptSrc = url ? url : defaultJs;
+        scriptTag.type = 'text/javascript';
+        scriptTag.charset = 'utf-8';
+        scriptTag.onload = scriptTag.onreadystatechange = function(res) {
+          if (!this.readyState || this.readyState === "loaded" || this.readyState === "complete" ) {
+            cb && cb(res);
+            scriptTag.onload = scriptTag.onreadystatechange = null;
+          }
+        };
+        scriptTag.src= isNoCache ? (scriptSrc+'?t='+Date.now()) : scriptSrc;
+        head.appendChild(scriptTag);
+      }
+
+      loadConfigScript("", function(res) {
+        console.log("动态加载js成功");
+        console.log("访问加载js里的内容:", scanVipConfig);
+      })
+    </script>
+</body>
+</html>

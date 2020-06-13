@@ -20,5 +20,6 @@ lib是使用这些模块可能需要依赖的库，是否需要可看相关dome�
 * *date_util* 常用日期格式化函数
 * *number_animate* 数字到数字的变化效果
 * *number_format* 数字常用格式化代码段
+* *load_script* 动态加载js,支持加时间戳实时拉取
 
 持续更新中......
