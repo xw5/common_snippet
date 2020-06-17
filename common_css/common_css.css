@@ -54,9 +54,20 @@ input[type=number]::-webkit-outer-spin-button {
   }
 }
 
-/* //横屏时使用的样式 */
+/* 横屏时使用的样式 */
 @media all and (orientation:landscape) {
   .css{
     width:750px;
   }
+}
+
+/* 全站变灰样式 */
+html {
+  -webkit-filter: grayscale(100%);
+  -moz-filter: grayscale(100%);
+  -ms-filter: grayscale(100%);
+  -o-filter: grayscale(100%);
+  filter: grayscale(100%);
+  filter: gray;
+  filter: progid:DXImageTransform.Microsoft.BasicImage(grayscale=1);
 }
