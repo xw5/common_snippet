@@ -3,7 +3,7 @@
 在模块化盛行的今天，收集工作中经常会用到的一些模块代码段是很有必要的！
 lib是使用这些模块可能需要依赖的库，是否需要可看相关dome演示
 
-* *common_css_reset* 记录一些奇异css重置代码段
+* *common_css* 记录一些奇异css代码段
 * *get_url_search* 获取url问号后参数的方法也就是search参数
 * *get_url_hash* 获取url#后参数的方法也就是hash值
 * *word_limit* 实现input还可输入字数的限制提示
