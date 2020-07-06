@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>浏览器窗口关闭拦截挽留</title>
+</head>
+<body>
+  测试页面
+    <script>
+      window.addEventListener("beforeunload", function(e) {
+        var confirmationMessage = "要记得保存！你确定要离开我吗？";
+        (e || window.event).returnValue = confirmationMessage; // 兼容 Gecko + IE
+        return confirmationMessage; // 兼容 Gecko + Webkit, Safari, Chrome
+      });
+    </script>
+</body>
+</html>
