@@ -12,6 +12,4 @@ function debounce(fn, wait) {
     timeout = setTimeout(fn, wait);    
   };
 }
-module.exports = {
-  set: debounce
-};
+module.exports = debounce
